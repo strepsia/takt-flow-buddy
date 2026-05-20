@@ -48,18 +48,24 @@ function Device() {
   };
   const delTemplate = (id: string) => setTemplates((t) => t.filter((x) => x.id !== id));
 
-  // Long-press clock for easter egg
+  // Long-press operator icon (5s) for easter egg
   const startHold = () => {
-    holdRef.current = window.setTimeout(() => {
-      setTab("egg");
-      setClockHold(false);
-    }, 900);
-    setClockHold(true);
+    holdStartRef.current = Date.now();
+    holdRef.current = window.setInterval(() => {
+      const elapsed = Date.now() - (holdStartRef.current ?? Date.now());
+      const p = Math.min(1, elapsed / HOLD_MS);
+      setHoldProgress(p);
+      if (p >= 1) {
+        endHold();
+        setTab("egg");
+      }
+    }, 60);
   };
   const endHold = () => {
-    if (holdRef.current) clearTimeout(holdRef.current);
+    if (holdRef.current) clearInterval(holdRef.current);
     holdRef.current = null;
-    setClockHold(false);
+    holdStartRef.current = null;
+    setHoldProgress(0);
   };
 
   const clock = new Date(now).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
