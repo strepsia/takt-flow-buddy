@@ -247,8 +247,8 @@ function ActiveRow({ a, now, onRemove }: { a: Active; now: number; onRemove: () 
           {alert && <Zap size={12} className="text-white" />}
           {a.name}
         </div>
-        <button onClick={onRemove} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
-          <X size={14} />
+        <button onClick={onRemove} aria-label="Eliminar" className="p-2 -m-1 rounded bg-[color:var(--danger)]/20 border border-[color:var(--danger)]/60 active:bg-[color:var(--danger)]/50 shrink-0">
+          <X size={22} strokeWidth={3} className="text-[color:var(--danger)]" />
         </button>
       </div>
 
@@ -296,8 +296,8 @@ function Config({
               <div className="text-[12px] font-semibold truncate">{t.name}</div>
               <div className="text-[10px] text-[color:var(--muted-foreground)]">{t.pieces}u · {t.minutes}min</div>
             </div>
-            <button onClick={() => onDelete(t.id)} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
-              <Trash2 size={14} />
+            <button onClick={() => onDelete(t.id)} aria-label="Borrar plantilla" className="p-2 -m-1 rounded bg-[color:var(--danger)]/20 border border-[color:var(--danger)]/60 active:bg-[color:var(--danger)]/50 shrink-0">
+              <Trash2 size={22} strokeWidth={2.5} className="text-[color:var(--danger)]" />
             </button>
           </div>
         ))}
