@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Plus, RotateCcw, X, Settings, Activity, ArrowLeft, Trash2, Zap } from "lucide-react";
+import { Plus, X, Settings, Activity, ArrowLeft, Trash2, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Device,
@@ -37,8 +37,6 @@ function Device() {
     ]);
   };
 
-  const resetOne = (id: string) =>
-    setActive((a) => a.map((x) => (x.id === id ? { ...x, startedAt: Date.now() } : x)));
   const removeOne = (id: string) => setActive((a) => a.filter((x) => x.id !== id));
 
   const addTemplate = (name: string, pieces: number, minutes: number) => {
@@ -98,7 +96,7 @@ function Device() {
             {/* Body */}
             <div className="h-[calc(320px-28px-32px)] overflow-y-auto no-scrollbar">
               {tab === "monitor" && (
-                <Monitor templates={templates} active={active} now={now} onLaunch={launch} onReset={resetOne} onRemove={removeOne} />
+                <Monitor templates={templates} active={active} now={now} onLaunch={launch} onRemove={removeOne} />
               )}
               {tab === "config" && (
                 <Config templates={templates} onAdd={addTemplate} onDelete={delTemplate} />
@@ -137,10 +135,10 @@ function NavBtn({ active, onClick, icon, label }: { active: boolean; onClick: ()
 }
 
 function Monitor({
-  templates, active, now, onLaunch, onReset, onRemove,
+  templates, active, now, onLaunch, onRemove,
 }: {
   templates: Template[]; active: Active[]; now: number;
-  onLaunch: (t: Template) => void; onReset: (id: string) => void; onRemove: (id: string) => void;
+  onLaunch: (t: Template) => void; onRemove: (id: string) => void;
 }) {
   return (
     <div className="flex flex-col">
@@ -183,7 +181,7 @@ function Monitor({
         ) : (
           <div className="flex flex-col gap-1.5">
             {active.map((a) => (
-              <ActiveRow key={a.id} a={a} now={now} onReset={() => onReset(a.id)} onRemove={() => onRemove(a.id)} />
+              <ActiveRow key={a.id} a={a} now={now} onRemove={() => onRemove(a.id)} />
             ))}
           </div>
         )}
@@ -192,11 +190,10 @@ function Monitor({
   );
 }
 
-function ActiveRow({ a, now, onReset, onRemove }: { a: Active; now: number; onReset: () => void; onRemove: () => void }) {
+function ActiveRow({ a, now, onRemove }: { a: Active; now: number; onRemove: () => void }) {
   const elapsed = Math.floor((now - a.startedAt) / 1000);
   const remaining = Math.max(0, a.totalSec - elapsed);
   const pct = Math.max(0, Math.min(1, remaining / a.totalSec));
-  const piecesLeft = Math.max(0, Math.ceil(a.pieces * pct));
   const mm = String(Math.floor(remaining / 60)).padStart(2, "0");
   const ss = String(remaining % 60).padStart(2, "0");
 
@@ -212,14 +209,9 @@ function ActiveRow({ a, now, onReset, onRemove }: { a: Active; now: number; onRe
           {alert && <Zap size={12} className="text-white" />}
           {a.name}
         </div>
-        <div className="flex items-center gap-1">
-          <button onClick={onReset} className="p-1 rounded bg-black/40 active:bg-[color:var(--accent)]/40">
-            <RotateCcw size={14} />
-          </button>
-          <button onClick={onRemove} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
-            <X size={14} />
-          </button>
-        </div>
+        <button onClick={onRemove} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
+          <X size={14} />
+        </button>
       </div>
 
       {alert ? (
@@ -227,13 +219,8 @@ function ActiveRow({ a, now, onReset, onRemove }: { a: Active; now: number; onRe
           ¡REAPROVISIONAR!
         </div>
       ) : (
-        <div className="flex items-baseline justify-between">
-          <div className="font-mono text-[26px] leading-none font-bold" style={{ color }}>
-            {mm}:{ss}
-          </div>
-          <div className="text-[11px] text-[color:var(--muted-foreground)]">
-            <span style={{ color }} className="font-bold text-[13px]">{piecesLeft}</span>/{a.pieces}u
-          </div>
+        <div className="font-mono text-[26px] leading-none font-bold" style={{ color }}>
+          {mm}:{ss}
         </div>
       )}
 
