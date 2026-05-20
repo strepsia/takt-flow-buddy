@@ -81,7 +81,7 @@ function Device() {
             <div className="flex items-center justify-between px-2 h-7 border-b border-[color:var(--panel-border)] bg-[color:var(--panel)]">
               <div className="flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--safe)] animate-pulse" />
-                <span className="text-[10px] tracking-widest text-[color:var(--muted-foreground)]">A3</span>
+                <span className="text-[10px] tracking-widest text-[color:var(--muted-foreground)]">SNLK</span>
               </div>
               <button
                 onPointerDown={startHold}
