@@ -135,8 +135,9 @@ function Device() {
                 )}
               </button>
 
-              <span className="font-mono text-[14px] font-bold text-[color:var(--foreground)]">
-                {clock}
+              <span className="flex items-center gap-1 font-mono text-[11px] font-bold" style={{ color: batColor }}>
+                <BatIcon size={14} strokeWidth={2.5} />
+                {battery}%
               </span>
             </div>
 
