@@ -181,7 +181,7 @@ function Monitor({
         ) : (
           <div className="flex flex-col gap-1.5">
             {active.map((a) => (
-              <ActiveRow key={a.id} a={a} now={now} onReset={() => onReset(a.id)} onRemove={() => onRemove(a.id)} />
+              <ActiveRow key={a.id} a={a} now={now} onRemove={() => onRemove(a.id)} />
             ))}
           </div>
         )}
