@@ -23,8 +23,10 @@ function Device() {
   const [templates, setTemplates] = useState<Template[]>(DEFAULT_TEMPLATES);
   const [active, setActive] = useState<Active[]>([]);
   const [now, setNow] = useState(Date.now());
-  const [clockHold, setClockHold] = useState(false);
+  const [holdProgress, setHoldProgress] = useState(0); // 0..1
   const holdRef = useRef<number | null>(null);
+  const holdStartRef = useRef<number | null>(null);
+  const HOLD_MS = 5000;
 
   useEffect(() => {
     const i = setInterval(() => setNow(Date.now()), 500);
