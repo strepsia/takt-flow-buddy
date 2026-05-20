@@ -190,11 +190,10 @@ function Monitor({
   );
 }
 
-function ActiveRow({ a, now, onReset, onRemove }: { a: Active; now: number; onReset: () => void; onRemove: () => void }) {
+function ActiveRow({ a, now, onRemove }: { a: Active; now: number; onRemove: () => void }) {
   const elapsed = Math.floor((now - a.startedAt) / 1000);
   const remaining = Math.max(0, a.totalSec - elapsed);
   const pct = Math.max(0, Math.min(1, remaining / a.totalSec));
-  const piecesLeft = Math.max(0, Math.ceil(a.pieces * pct));
   const mm = String(Math.floor(remaining / 60)).padStart(2, "0");
   const ss = String(remaining % 60).padStart(2, "0");
 
