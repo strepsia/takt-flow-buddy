@@ -65,12 +65,13 @@ function Device() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-4 bg-[radial-gradient(circle_at_center,#0a0a0a,#000)]">
-      <div className="flex flex-col items-center gap-3">
-        {/* Bezel */}
-        <div
-          className="relative rounded-[28px] bg-neutral-950 p-3 shadow-[0_0_60px_rgba(0,229,255,0.08),inset_0_0_0_1px_#1a1a1a]"
-          style={{ width: 210, height: 380 }}
-        >
+      <div className="flex flex-col items-center gap-6">
+        {/* Bezel scaled x2 for usability */}
+        <div style={{ width: 420, height: 760 }} className="relative">
+          <div
+            className="relative rounded-[28px] bg-neutral-950 p-3 shadow-[0_0_60px_rgba(0,229,255,0.08),inset_0_0_0_1px_#1a1a1a] origin-top-left"
+            style={{ width: 210, height: 380, transform: "scale(2)" }}
+          >
           <div className="absolute top-1 left-1/2 -translate-x-1/2 text-[8px] tracking-[0.3em] text-neutral-700">
             LILYGO • T-DISPLAY-S3
           </div>
