@@ -87,34 +87,48 @@ function Device() {
             style={{ width: 170, height: 320, margin: "20px auto 0" }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-2 h-7 border-b border-[color:var(--panel-border)] bg-[color:var(--panel)]">
+            <div className="relative flex items-center justify-between px-2 h-7 border-b border-[color:var(--panel-border)] bg-[color:var(--panel)]">
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--safe)] animate-pulse" />
                 <span className="text-[10px] tracking-widest text-[color:var(--muted-foreground)]">SNLK</span>
-                <button
-                  onClick={() => setTab("egg")}
-                  aria-label="Operador Hyster"
-                  className="p-0 rounded active:bg-[color:var(--accent)]/30 transition"
-                >
-                  <img
-                    src={hysterOperator}
-                    alt=""
-                    width={20}
-                    height={20}
-                    className="block"
-                    style={{ imageRendering: "pixelated", objectFit: "contain" }}
-                    draggable={false}
-                  />
-                </button>
               </div>
+
+              {/* Centered operator — 5s long-press to launch easter egg */}
               <button
                 onPointerDown={startHold}
                 onPointerUp={endHold}
                 onPointerLeave={endHold}
-                className={`font-mono text-[14px] font-bold px-1 rounded transition ${clockHold ? "bg-[color:var(--accent)]/30 text-[color:var(--accent)]" : "text-[color:var(--foreground)]"}`}
+                onPointerCancel={endHold}
+                aria-label="Operador Hyster (mantener 5s)"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded touch-none select-none"
+                style={{ width: 26, height: 26 }}
               >
-                {clock}
+                <img
+                  src={hysterOperator}
+                  alt=""
+                  width={26}
+                  height={26}
+                  className="block"
+                  style={{
+                    imageRendering: "pixelated",
+                    objectFit: "contain",
+                    filter: holdProgress > 0 ? `drop-shadow(0 0 ${4 + holdProgress * 6}px var(--accent))` : "none",
+                    transform: `scale(${1 + holdProgress * 0.15})`,
+                    transition: "transform 80ms linear",
+                  }}
+                  draggable={false}
+                />
+                {holdProgress > 0 && (
+                  <div
+                    className="absolute left-0 right-0 -bottom-1 h-0.5 rounded-full bg-[color:var(--accent)]"
+                    style={{ width: `${holdProgress * 100}%` }}
+                  />
+                )}
               </button>
+
+              <span className="font-mono text-[14px] font-bold text-[color:var(--foreground)]">
+                {clock}
+              </span>
             </div>
 
             {/* Body */}
