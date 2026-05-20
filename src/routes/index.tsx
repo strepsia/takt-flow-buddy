@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Plus, X, Settings, Activity, ArrowLeft, Trash2, Zap } from "lucide-react";
+import hysterOperator from "@/assets/hyster-operator.png";
 
 export const Route = createFileRoute("/")({
   component: Device,
