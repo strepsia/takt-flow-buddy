@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Plus, X, Settings, Activity, ArrowLeft, Trash2, Zap } from "lucide-react";
+import { Plus, X, Settings, Activity, ArrowLeft, Trash2, Zap, BatteryFull, BatteryMedium, BatteryLow, BatteryWarning } from "lucide-react";
 import hysterOperator from "@/assets/hyster-operator.png";
 
 export const Route = createFileRoute("/")({
@@ -68,7 +68,16 @@ function Device() {
     setHoldProgress(0);
   };
 
-  const clock = new Date(now).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+  // Fake battery indicator: slow drain, recharges when it hits 5%
+  const [battery, setBattery] = useState(87);
+  useEffect(() => {
+    const i = setInterval(() => {
+      setBattery((b) => (b <= 5 ? 100 : b - 1));
+    }, 30000);
+    return () => clearInterval(i);
+  }, []);
+  const BatIcon = battery > 70 ? BatteryFull : battery > 35 ? BatteryMedium : battery > 15 ? BatteryLow : BatteryWarning;
+  const batColor = battery > 35 ? "var(--safe)" : battery > 15 ? "var(--warn)" : "var(--danger)";
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-4 bg-[radial-gradient(circle_at_center,#0a0a0a,#000)]">
@@ -126,8 +135,9 @@ function Device() {
                 )}
               </button>
 
-              <span className="font-mono text-[14px] font-bold text-[color:var(--foreground)]">
-                {clock}
+              <span className="flex items-center gap-1 font-mono text-[11px] font-bold" style={{ color: batColor }}>
+                <BatIcon size={14} strokeWidth={2.5} />
+                {battery}%
               </span>
             </div>
 
