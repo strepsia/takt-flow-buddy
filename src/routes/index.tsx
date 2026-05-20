@@ -126,7 +126,7 @@ function NavBtn({ active, onClick, icon, label }: { active: boolean; onClick: ()
   return (
     <button
       onClick={onClick}
-      className={`flex-1 flex items-center justify-center gap-1 text-[8px] tracking-widest transition ${
+      className={`flex-1 flex items-center justify-center gap-1.5 text-[11px] font-semibold tracking-widest transition ${
         active ? "text-[color:var(--accent)] bg-[color:var(--accent)]/10" : "text-[color:var(--muted-foreground)]"
       }`}
     >
