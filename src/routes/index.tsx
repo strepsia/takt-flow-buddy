@@ -135,10 +135,10 @@ function NavBtn({ active, onClick, icon, label }: { active: boolean; onClick: ()
 }
 
 function Monitor({
-  templates, active, now, onLaunch, onReset, onRemove,
+  templates, active, now, onLaunch, onRemove,
 }: {
   templates: Template[]; active: Active[]; now: number;
-  onLaunch: (t: Template) => void; onReset: (id: string) => void; onRemove: (id: string) => void;
+  onLaunch: (t: Template) => void; onRemove: (id: string) => void;
 }) {
   return (
     <div className="flex flex-col">
