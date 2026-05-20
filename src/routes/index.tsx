@@ -247,8 +247,8 @@ function ActiveRow({ a, now, onRemove }: { a: Active; now: number; onRemove: () 
           {alert && <Zap size={12} className="text-white" />}
           {a.name}
         </div>
-        <button onClick={onRemove} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
-          <X size={14} />
+        <button onClick={onRemove} aria-label="Eliminar" className="p-2 -m-1 rounded bg-[color:var(--danger)]/20 border border-[color:var(--danger)]/60 active:bg-[color:var(--danger)]/50 shrink-0">
+          <X size={22} strokeWidth={3} className="text-[color:var(--danger)]" />
         </button>
       </div>
 
