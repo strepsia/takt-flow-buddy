@@ -114,6 +114,7 @@ function Device() {
               </div>
             )}
           </div>
+          </div>
         </div>
         <p className="text-[10px] text-neutral-600 tracking-widest">PROTO · TÁCTIL 170×320</p>
       </div>
