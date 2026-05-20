@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Plus, X, Settings, Activity, ArrowLeft, Trash2, Zap } from "lucide-react";
+import hysterOperator from "@/assets/hyster-operator.png";
 
 export const Route = createFileRoute("/")({
   component: Device,
@@ -79,9 +80,24 @@ function Device() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-2 h-7 border-b border-[color:var(--panel-border)] bg-[color:var(--panel)]">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--safe)] animate-pulse" />
                 <span className="text-[10px] tracking-widest text-[color:var(--muted-foreground)]">SNLK</span>
+                <button
+                  onClick={() => setTab("egg")}
+                  aria-label="Operador Hyster"
+                  className="p-0 rounded active:bg-[color:var(--accent)]/30 transition"
+                >
+                  <img
+                    src={hysterOperator}
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="block"
+                    style={{ imageRendering: "pixelated", objectFit: "contain" }}
+                    draggable={false}
+                  />
+                </button>
               </div>
               <button
                 onPointerDown={startHold}
