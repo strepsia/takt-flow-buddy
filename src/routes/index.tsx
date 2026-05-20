@@ -37,8 +37,6 @@ function Device() {
     ]);
   };
 
-  const resetOne = (id: string) =>
-    setActive((a) => a.map((x) => (x.id === id ? { ...x, startedAt: Date.now() } : x)));
   const removeOne = (id: string) => setActive((a) => a.filter((x) => x.id !== id));
 
   const addTemplate = (name: string, pieces: number, minutes: number) => {
