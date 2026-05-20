@@ -68,7 +68,16 @@ function Device() {
     setHoldProgress(0);
   };
 
-  const clock = new Date(now).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+  // Fake battery indicator: slow drain, recharges when it hits 5%
+  const [battery, setBattery] = useState(87);
+  useEffect(() => {
+    const i = setInterval(() => {
+      setBattery((b) => (b <= 5 ? 100 : b - 1));
+    }, 30000);
+    return () => clearInterval(i);
+  }, []);
+  const BatIcon = battery > 70 ? BatteryFull : battery > 35 ? BatteryMedium : battery > 15 ? BatteryLow : BatteryWarning;
+  const batColor = battery > 35 ? "var(--safe)" : battery > 15 ? "var(--warn)" : "var(--danger)";
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-4 bg-[radial-gradient(circle_at_center,#0a0a0a,#000)]">
