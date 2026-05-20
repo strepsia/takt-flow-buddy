@@ -212,14 +212,9 @@ function ActiveRow({ a, now, onReset, onRemove }: { a: Active; now: number; onRe
           {alert && <Zap size={12} className="text-white" />}
           {a.name}
         </div>
-        <div className="flex items-center gap-1">
-          <button onClick={onReset} className="p-1 rounded bg-black/40 active:bg-[color:var(--accent)]/40">
-            <RotateCcw size={14} />
-          </button>
-          <button onClick={onRemove} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
-            <X size={14} />
-          </button>
-        </div>
+        <button onClick={onRemove} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
+          <X size={14} />
+        </button>
       </div>
 
       {alert ? (
@@ -227,13 +222,8 @@ function ActiveRow({ a, now, onReset, onRemove }: { a: Active; now: number; onRe
           ¡REAPROVISIONAR!
         </div>
       ) : (
-        <div className="flex items-baseline justify-between">
-          <div className="font-mono text-[26px] leading-none font-bold" style={{ color }}>
-            {mm}:{ss}
-          </div>
-          <div className="text-[11px] text-[color:var(--muted-foreground)]">
-            <span style={{ color }} className="font-bold text-[13px]">{piecesLeft}</span>/{a.pieces}u
-          </div>
+        <div className="font-mono text-[26px] leading-none font-bold" style={{ color }}>
+          {mm}:{ss}
         </div>
       )}
 
