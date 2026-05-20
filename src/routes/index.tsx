@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Plus, RotateCcw, X, Settings, Activity, ArrowLeft, Trash2, Zap } from "lucide-react";
+import { Plus, X, Settings, Activity, ArrowLeft, Trash2, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Device,
