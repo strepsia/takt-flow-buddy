@@ -80,23 +80,23 @@ function Device() {
             style={{ width: 170, height: 320, margin: "20px auto 0" }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-2 h-6 border-b border-[color:var(--panel-border)] bg-[color:var(--panel)]">
+            <div className="flex items-center justify-between px-2 h-7 border-b border-[color:var(--panel-border)] bg-[color:var(--panel)]">
               <div className="flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--safe)] animate-pulse" />
-                <span className="text-[8px] tracking-widest text-[color:var(--muted-foreground)]">LINEA·A3</span>
+                <span className="text-[10px] tracking-widest text-[color:var(--muted-foreground)]">A3</span>
               </div>
               <button
                 onPointerDown={startHold}
                 onPointerUp={endHold}
                 onPointerLeave={endHold}
-                className={`font-mono text-[11px] px-1 rounded transition ${clockHold ? "bg-[color:var(--accent)]/30 text-[color:var(--accent)]" : "text-[color:var(--foreground)]"}`}
+                className={`font-mono text-[14px] font-bold px-1 rounded transition ${clockHold ? "bg-[color:var(--accent)]/30 text-[color:var(--accent)]" : "text-[color:var(--foreground)]"}`}
               >
                 {clock}
               </button>
             </div>
 
             {/* Body */}
-            <div className="h-[calc(320px-24px-22px)] overflow-y-auto no-scrollbar">
+            <div className="h-[calc(320px-28px-32px)] overflow-y-auto no-scrollbar">
               {tab === "monitor" && (
                 <Monitor templates={templates} active={active} now={now} onLaunch={launch} onReset={resetOne} onRemove={removeOne} />
               )}
@@ -108,9 +108,9 @@ function Device() {
 
             {/* Bottom nav */}
             {tab !== "egg" && (
-              <div className="absolute bottom-0 left-0 right-0 h-[22px] flex border-t border-[color:var(--panel-border)] bg-[color:var(--panel)]">
-                <NavBtn active={tab === "monitor"} onClick={() => setTab("monitor")} icon={<Activity size={11} />} label="MONITOR" />
-                <NavBtn active={tab === "config"} onClick={() => setTab("config")} icon={<Settings size={11} />} label="CONFIG" />
+              <div className="absolute bottom-0 left-0 right-0 h-[32px] flex border-t border-[color:var(--panel-border)] bg-[color:var(--panel)]">
+                <NavBtn active={tab === "monitor"} onClick={() => setTab("monitor")} icon={<Activity size={14} />} label="MONITOR" />
+                <NavBtn active={tab === "config"} onClick={() => setTab("config")} icon={<Settings size={14} />} label="CONFIG" />
               </div>
             )}
           </div>
