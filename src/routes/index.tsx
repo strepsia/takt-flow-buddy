@@ -96,7 +96,7 @@ function Device() {
             {/* Body */}
             <div className="h-[calc(320px-28px-32px)] overflow-y-auto no-scrollbar">
               {tab === "monitor" && (
-                <Monitor templates={templates} active={active} now={now} onLaunch={launch} onReset={resetOne} onRemove={removeOne} />
+                <Monitor templates={templates} active={active} now={now} onLaunch={launch} onRemove={removeOne} />
               )}
               {tab === "config" && (
                 <Config templates={templates} onAdd={addTemplate} onDelete={delTemplate} />
