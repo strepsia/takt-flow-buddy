@@ -145,26 +145,26 @@ function Monitor({
   return (
     <div className="flex flex-col">
       {/* Launch pad */}
-      <div className="px-1.5 pt-1.5 pb-1 border-b border-[color:var(--panel-border)]">
-        <div className="text-[7px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1 px-0.5">LANZAMIENTO</div>
-        <div className="grid grid-cols-2 gap-1">
+      <div className="px-2 pt-2 pb-2 border-b border-[color:var(--panel-char)]" style={{ borderColor: "var(--panel-border)" }}>
+        <div className="text-[10px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1.5">LANZAR</div>
+        <div className="flex flex-col gap-1.5">
           {templates.map((t) => (
             <button
               key={t.id}
               onClick={() => onLaunch(t)}
-              className="group bg-[color:var(--muted)] border border-[color:var(--panel-border)] rounded px-1 py-1 text-left active:bg-[color:var(--accent)]/20 active:border-[color:var(--accent)] transition"
+              className="bg-[color:var(--muted)] border border-[color:var(--panel-border)] rounded px-2 py-2 text-left active:bg-[color:var(--accent)]/20 active:border-[color:var(--accent)] transition flex items-center justify-between"
             >
-              <div className="flex items-center gap-1">
-                <Plus size={9} className="text-[color:var(--accent)]" />
-                <div className="text-[9px] font-semibold truncate">{t.name}</div>
+              <div className="flex items-center gap-1.5 min-w-0">
+                <Plus size={14} className="text-[color:var(--accent)] shrink-0" />
+                <div className="text-[13px] font-semibold truncate">{t.name}</div>
               </div>
-              <div className="text-[7px] text-[color:var(--muted-foreground)] tracking-wider">
+              <div className="text-[10px] text-[color:var(--muted-foreground)] tracking-wider shrink-0">
                 {t.pieces}u·{t.minutes}m
               </div>
             </button>
           ))}
           {templates.length === 0 && (
-            <div className="col-span-2 text-[8px] text-[color:var(--muted-foreground)] text-center py-2">
+            <div className="text-[11px] text-[color:var(--muted-foreground)] text-center py-2">
               Sin plantillas. Ve a CONFIG.
             </div>
           )}
@@ -172,16 +172,16 @@ function Monitor({
       </div>
 
       {/* Active list */}
-      <div className="px-1.5 pt-1 pb-2">
-        <div className="text-[7px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1 px-0.5 flex justify-between">
+      <div className="px-2 pt-2 pb-2">
+        <div className="text-[10px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1.5 flex justify-between">
           <span>ACTIVOS</span><span>{active.length}</span>
         </div>
         {active.length === 0 ? (
-          <div className="text-[8px] text-[color:var(--muted-foreground)] text-center py-3 border border-dashed border-[color:var(--panel-border)] rounded">
+          <div className="text-[11px] text-[color:var(--muted-foreground)] text-center py-4 border border-dashed border-[color:var(--panel-border)] rounded">
             Sin carros activos
           </div>
         ) : (
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1.5">
             {active.map((a) => (
               <ActiveRow key={a.id} a={a} now={now} onReset={() => onReset(a.id)} onRemove={() => onRemove(a.id)} />
             ))}
@@ -205,39 +205,39 @@ function ActiveRow({ a, now, onReset, onRemove }: { a: Active; now: number; onRe
 
   return (
     <div
-      className={`relative rounded border ${alert ? "alert-blink border-[color:var(--danger)]" : "border-[color:var(--panel-border)] bg-[color:var(--muted)]"} px-1.5 py-1`}
+      className={`relative rounded border ${alert ? "alert-blink border-[color:var(--danger)]" : "border-[color:var(--panel-border)] bg-[color:var(--muted)]"} px-2 py-1.5`}
     >
-      <div className="flex items-center justify-between gap-1">
-        <div className="text-[9px] font-semibold truncate flex items-center gap-1">
-          {alert && <Zap size={9} className="text-white" />}
+      <div className="flex items-center justify-between gap-1 mb-1">
+        <div className="text-[12px] font-semibold truncate flex items-center gap-1">
+          {alert && <Zap size={12} className="text-white" />}
           {a.name}
         </div>
-        <div className="flex items-center gap-0.5">
-          <button onClick={onReset} className="p-0.5 rounded bg-black/40 active:bg-[color:var(--accent)]/40">
-            <RotateCcw size={9} />
+        <div className="flex items-center gap-1">
+          <button onClick={onReset} className="p-1 rounded bg-black/40 active:bg-[color:var(--accent)]/40">
+            <RotateCcw size={14} />
           </button>
-          <button onClick={onRemove} className="p-0.5 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
-            <X size={9} />
+          <button onClick={onRemove} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
+            <X size={14} />
           </button>
         </div>
       </div>
 
       {alert ? (
-        <div className="text-[8px] font-bold text-white tracking-wider mt-0.5">
-          ¡ALERTA REAPROVISIONAMIENTO!
+        <div className="text-[11px] font-bold text-white tracking-wider">
+          ¡REAPROVISIONAR!
         </div>
       ) : (
-        <div className="flex items-baseline justify-between mt-0.5">
-          <div className="font-mono text-[16px] leading-none font-bold" style={{ color }}>
+        <div className="flex items-baseline justify-between">
+          <div className="font-mono text-[26px] leading-none font-bold" style={{ color }}>
             {mm}:{ss}
           </div>
-          <div className="text-[8px] text-[color:var(--muted-foreground)]">
-            <span style={{ color }} className="font-bold">{piecesLeft}</span>/{a.pieces} u
+          <div className="text-[11px] text-[color:var(--muted-foreground)]">
+            <span style={{ color }} className="font-bold text-[13px]">{piecesLeft}</span>/{a.pieces}u
           </div>
         </div>
       )}
 
-      <div className="mt-1 h-1 rounded-full bg-black/60 overflow-hidden">
+      <div className="mt-1.5 h-1.5 rounded-full bg-black/60 overflow-hidden">
         <div
           className="h-full transition-all duration-500"
           style={{ width: `${pct * 100}%`, background: color }}
@@ -262,44 +262,44 @@ function Config({
   };
 
   return (
-    <div className="px-1.5 pt-1.5 pb-2">
-      <div className="text-[7px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1 px-0.5">PLANTILLAS</div>
-      <div className="flex flex-col gap-1 mb-2">
+    <div className="px-2 pt-2 pb-3">
+      <div className="text-[10px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1.5">PLANTILLAS</div>
+      <div className="flex flex-col gap-1.5 mb-3">
         {templates.map((t) => (
-          <div key={t.id} className="flex items-center justify-between bg-[color:var(--muted)] border border-[color:var(--panel-border)] rounded px-1.5 py-1">
+          <div key={t.id} className="flex items-center justify-between bg-[color:var(--muted)] border border-[color:var(--panel-border)] rounded px-2 py-1.5">
             <div className="min-w-0">
-              <div className="text-[9px] font-semibold truncate">{t.name}</div>
-              <div className="text-[7px] text-[color:var(--muted-foreground)]">{t.pieces}u · {t.minutes}min</div>
+              <div className="text-[12px] font-semibold truncate">{t.name}</div>
+              <div className="text-[10px] text-[color:var(--muted-foreground)]">{t.pieces}u · {t.minutes}min</div>
             </div>
-            <button onClick={() => onDelete(t.id)} className="p-0.5 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
-              <Trash2 size={9} />
+            <button onClick={() => onDelete(t.id)} className="p-1 rounded bg-black/40 active:bg-[color:var(--danger)]/40">
+              <Trash2 size={14} />
             </button>
           </div>
         ))}
       </div>
 
-      <div className="text-[7px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1 px-0.5">NUEVA</div>
-      <div className="flex flex-col gap-1 bg-[color:var(--muted)] border border-[color:var(--panel-border)] rounded p-1.5">
+      <div className="text-[10px] tracking-[0.2em] text-[color:var(--muted-foreground)] mb-1.5">NUEVA</div>
+      <div className="flex flex-col gap-1.5 bg-[color:var(--muted)] border border-[color:var(--panel-border)] rounded p-2">
         <input
           value={name} onChange={(e) => setName(e.target.value)}
           placeholder="Nombre"
-          className="bg-black/60 text-[9px] rounded px-1.5 py-1 outline-none border border-transparent focus:border-[color:var(--accent)] placeholder:text-[color:var(--muted-foreground)]"
+          className="bg-black/60 text-[13px] rounded px-2 py-1.5 outline-none border border-transparent focus:border-[color:var(--accent)] placeholder:text-[color:var(--muted-foreground)]"
         />
-        <div className="grid grid-cols-2 gap-1">
+        <div className="grid grid-cols-2 gap-1.5">
           <input
             value={pieces} onChange={(e) => setPieces(e.target.value.replace(/\D/g, ""))}
             placeholder="Piezas" inputMode="numeric"
-            className="bg-black/60 text-[9px] rounded px-1.5 py-1 outline-none border border-transparent focus:border-[color:var(--accent)] placeholder:text-[color:var(--muted-foreground)]"
+            className="bg-black/60 text-[13px] rounded px-2 py-1.5 outline-none border border-transparent focus:border-[color:var(--accent)] placeholder:text-[color:var(--muted-foreground)] min-w-0"
           />
           <input
             value={minutes} onChange={(e) => setMinutes(e.target.value.replace(/\D/g, ""))}
             placeholder="Min" inputMode="numeric"
-            className="bg-black/60 text-[9px] rounded px-1.5 py-1 outline-none border border-transparent focus:border-[color:var(--accent)] placeholder:text-[color:var(--muted-foreground)]"
+            className="bg-black/60 text-[13px] rounded px-2 py-1.5 outline-none border border-transparent focus:border-[color:var(--accent)] placeholder:text-[color:var(--muted-foreground)] min-w-0"
           />
         </div>
         <button
           onClick={submit}
-          className="bg-[color:var(--accent)]/20 border border-[color:var(--accent)] text-[color:var(--accent)] text-[9px] font-bold tracking-widest rounded py-1 active:bg-[color:var(--accent)]/40"
+          className="bg-[color:var(--accent)]/20 border border-[color:var(--accent)] text-[color:var(--accent)] text-[12px] font-bold tracking-widest rounded py-2 active:bg-[color:var(--accent)]/40"
         >
           + AÑADIR
         </button>
@@ -311,16 +311,16 @@ function Config({
 function EasterEgg({ onBack }: { onBack: () => void }) {
   return (
     <div className="h-full flex flex-col">
-      <div className="px-1.5 py-1 border-b border-[color:var(--panel-border)] flex items-center gap-1">
-        <button onClick={onBack} className="p-0.5 rounded bg-black/40 active:bg-[color:var(--accent)]/40">
-          <ArrowLeft size={11} />
+      <div className="px-2 py-1.5 border-b border-[color:var(--panel-border)] flex items-center gap-2">
+        <button onClick={onBack} className="p-1 rounded bg-black/40 active:bg-[color:var(--accent)]/40">
+          <ArrowLeft size={16} />
         </button>
-        <span className="text-[8px] tracking-widest text-[color:var(--muted-foreground)]">AGV CHAOS</span>
+        <span className="text-[11px] tracking-widest text-[color:var(--muted-foreground)]">AGV CHAOS</span>
       </div>
       <div className="flex-1 flex flex-col items-center justify-center px-3 text-center gap-2">
-        <div className="text-[22px]">🪳</div>
-        <div className="text-[10px] font-bold text-[color:var(--accent)] tracking-widest">AGV CHAOS</div>
-        <div className="text-[8px] text-[color:var(--muted-foreground)] leading-tight">
+        <div className="text-[36px]">🪳</div>
+        <div className="text-[14px] font-bold text-[color:var(--accent)] tracking-widest">AGV CHAOS</div>
+        <div className="text-[10px] text-[color:var(--muted-foreground)] leading-tight">
           Listo para integrar código de Claude
         </div>
       </div>
